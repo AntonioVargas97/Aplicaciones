@@ -1,6 +1,9 @@
 const { app, BrowserWindow, Menu } = require('electron');
 const menu = require('./menu');
+const { autoUpdater } = require('electron-updater');
+
 let window;
+
 app.on('ready', () => {
     window = new BrowserWindow({
         width: 800,
@@ -9,6 +12,9 @@ app.on('ready', () => {
             nodeIntegration: true
         }
     });
+
     window.loadFile('index.html');
+    autoUpdater.checkForUpdatesAndNotify();
 });
-Menu.setApplicationMenu(Menu);
+
+Menu.setApplicationMenu(menu);
